@@ -11,9 +11,9 @@ from twython import Twython
 # CONFIGURATION TWITTER
 
 CONSUMER_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-CONSUMER_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-ACCESS_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-ACCESS_TOKEN_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+CONSUMER_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ACCESS_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+ACCESS_TOKEN_SECRET = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 # Catégories des gifs (giphy.com)
 GIF_CATEGORIES = ["computer", "network", "hacker", "fail", "code", "unicorn", "cat"]
@@ -212,7 +212,7 @@ def kaamelott():
     media = ""
     return content, media
 
-# Tweete comme @YOUR_TWITTER_NAME
+# Tweete comme @Your_Twitter_Name
 def fakeYourTwitterName():
     # Pour des raisons techniques liées à l'API Twitter, la limite par recherche est de 200 tweets
     # On fait donc une boucle de 16x200 tweets, soient 3.200 tweets comme base de travail
@@ -221,7 +221,7 @@ def fakeYourTwitterName():
     liste_tweets = []
     for i in range(0, 16):
         j = len(liste_tweets)
-        user_timeline = tw.get_user_timeline(screen_name="your_twitter_name",count=200,include_retweets=False)
+        user_timeline = tw.get_user_timeline(screen_name="Your_Twitter_Name",count=200,include_retweets=False)
         for tweet in user_timeline:
             liste_tweets.insert(j, tweet['text'])
             j += 1
@@ -229,8 +229,10 @@ def fakeYourTwitterName():
     first_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
     second_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
     # On supprime tous les RT (l'option plus haut semble insuffisante ou inefficace)
-    while "RT @" in first_tweet:
+    while "RT " in first_tweet:
         first_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
+    while "RT " in second_tweet:
+        second_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
    # On s'évite les deux tweets identiques
     while first_tweet == second_tweet:
         second_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
@@ -239,7 +241,7 @@ def fakeYourTwitterName():
     second_tweet = second_tweet.split()
     # On compose les deux moitiés de contenu et on les rassemble en un tweet final (sans @ ni lien)
     compteur_car = False
-    j = -1
+    j = 0
     i = len(second_tweet) - 1
     part1 = ""
     while compteur_car == False:
