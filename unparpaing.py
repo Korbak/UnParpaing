@@ -244,11 +244,11 @@ def fakeYourTwitterName():
     j = 0
     i = len(second_tweet) - 1
     part1 = ""
-    while compteur_car == False:
+    while compteur_car == False and j < (len(first_tweet) - 1):
         while "@" in first_tweet[j] or "http" in first_tweet[j]:
-            j += 1
-        if (len(part1) + len(first_tweet[j])) <= 62:
-            if j < (len(first_tweet) - 1):
+                j += 1
+        if j < (len(first_tweet) - 1):
+            if (len(part1) + len(first_tweet[j])) < 62:
                 part1 = part1 + " " + first_tweet[j]
                 j += 1
             else:
