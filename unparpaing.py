@@ -166,18 +166,23 @@ def gif():
 
 # RT si c digital
 def digital():
+    #On lance une recherche Twitter
     tw = twitter()
     search_results = tw.search(q='digital OR digitale -filter:retweets', count=200, lang='fr', result_type='mixed')
+
     mot_precedent = ""
     liste_tweets = []
     i = 0
+
     try:
         # On crée une liste contenant les résultats
         for tweet in search_results["statuses"]:
             liste_tweets.insert(i, tweet)
             i += 1
+
         # On tire un tweet au hasard
         tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
+
         # On crée le RT
         texte = tweet["text"]
         quote_id = tweet["id_str"]
@@ -198,18 +203,23 @@ def digital():
             mot_precedent = "Digital"
     except :
         return
+    
     content = (mot_precedent + " avec les doigts !" + " http://twitter.com/" + user_id + "/status/" + quote_id).capitalize()
     media = ""
+    
     return content, media;
 
 # Quote Kaamelott
 def kaamelott():
     citations_kaamelott = open('kaamelott.txt', 'r').read().split('%')
     quote = ""
+    
     while quote == "" or len(quote) > 129:
         quote = (random.choice(citations_kaamelott))
+    
     content = quote + "#Kaamelott"
     media = ""
+    
     return content, media
 
 # Tweete comme @Your_Twitter_Name
@@ -219,35 +229,43 @@ def fakeYourTwitterName():
     # qu'on insère dans une liste
     tw = twitter()
     liste_tweets = []
+    
     for i in range(0, 16):
         j = len(liste_tweets)
-        user_timeline = tw.get_user_timeline(screen_name="Your_Twitter_Name",count=200,include_retweets=False)
+        user_timeline = tw.get_user_timeline(screen_name="Your_Twitter_Name,count=200,include_retweets=False)
         for tweet in user_timeline:
             liste_tweets.insert(j, tweet['text'])
             j += 1
+    
     # On a donc une liste 3.200 tweets, dont on extrait 2 tweets aléatoirement
     first_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
     second_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
+    
     # On supprime tous les RT (l'option plus haut semble insuffisante ou inefficace)
     while "RT " in first_tweet:
         first_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
     while "RT " in second_tweet:
         second_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
-   # On s'évite les deux tweets identiques
+    
+    # On s'évite les deux tweets identiques
     while first_tweet == second_tweet:
         second_tweet = liste_tweets[random.randint(0,len(liste_tweets))-1]
+    
     # On transforme chaque tweet en liste de mots
     first_tweet = first_tweet.split()
     second_tweet = second_tweet.split()
+    
     # On compose les deux moitiés de contenu et on les rassemble en un tweet final (sans @ ni lien)
     compteur_car = False
     j = 0
     i = len(second_tweet) - 1
     part1 = ""
     while compteur_car == False and j < (len(first_tweet) - 1):
-        while "@" in first_tweet[j] or "http" in first_tweet[j]:
-                j += 1
-        if j < (len(first_tweet) - 1):
+        while ("@" in first_tweet[j] or "http" in first_tweet[j]) and compteur_car == False:
+            j += 1
+            if j > (len(first_tweet) - 1):
+                compteur_car = True
+        if j <= (len(first_tweet) - 1):
             if (len(part1) + len(first_tweet[j])) < 62:
                 part1 = part1 + " " + first_tweet[j]
                 j += 1
@@ -255,20 +273,45 @@ def fakeYourTwitterName():
                 compteur_car = True
         else:
             compteur_car = True
+    
     compteur_car = False
     part2 = ""
-    while compteur_car == False and i > 0:
-        while "@" in second_tweet[i] or "http" in second_tweet[i]:
+    while compteur_car == False:
+        while ("@" in second_tweet[i] or "http" in second_tweet[i]) and compteur_car == False:
             i -= 1
-        if (len(part1) + len(part2) + len(second_tweet[i])) >= 124:
+            if i < 0:
+                compteur_car = True
+        if i >= 0:
+            if (len(part1) + len(part2) + len(second_tweet[i])) < 124:
+                part2 = second_tweet[i] + " " + part2
+                i -= 1
+            else:
+                compteur_car = True
+        else:
             compteur_car = True
-        elif i >= 0:
-            part2 = second_tweet[i] + " " + part2
-        i -= 1
+    
     content = part1 + " " + part2 + " #TweeteCommeMoi"
     media = ""
+    
     return content, media
 
+#Bullshit marketing
+def bullshit():
+    liste_sujets = ["le cryptage", "le cloud", "la blockchain", "le réseau Tor", "le darknet", "le deepweb", "le darkweb", "le big data", "l'uberisation", "le digital", "l'interconnexion", "l'utilisateur", "le geek 2.0", "le web 2.0", "la technologie du bitcoin", "l'identité digitale", "la cybersécurité", "le piratage", "la start-up", "le smartphone", "l'open-source", "la solution digital", "la génération Y", "le jeune super-connecté", "la smart-city","l'internet des objets", "Facebook", "Twitter", "Google", "Tinder", "YouTube", "le content-media", "chaque flux de données"]
+
+    liste_verbes = ["crypte", "protège", "garantit", "isole", "individualise", "promeut", "permet", "implémente", "solutionne", "numérise", "digitalise", "recherche", "développe", "modernise", "smartise", "géolocalise", "uberise", "sécurise", "encrypte", "libère", "fait évoluer", "transforme", "redessine", "réinvente", "incarne", "passe à travers", "start-upise", "représente", "incarne", "innove dans", "avance vers", "efface", "remet en question", "encapsule", "reconnecte", "connecte", "individualise", "propose", "s'intègre dans"]
+
+    liste_adjectifs = ["du digital", "de la sécurité", "des données personnelles", "du big data", "du marketing 2.0", "du voyageur moderne", "du client connecté", "connecté", "moderne", "2.0", "dans le big data", "sur Internet", "pour mobile", "du web", "sous forme d'application mobile", "sur smartphone", "directement en ligne", "sur demande", "avec individualisation", "en personnalisant le tout", "sans faille", "avec stabilité et performance", "et une sécurité quasi-militaire", "100% sécurisé", "encrypté", "chiffré", "totalement novateur", "rendant le monde meilleur", "de l'intelligence artificielle", "en self-improvement", "totalement tactile", "full-responsive", "dans l'environnement urbain", "vers la domotique", "en réalité virtuelle"]
+
+    sujet = liste_sujets[random.randint(0,len(liste_sujets))-1]
+    verbe = liste_verbes[random.randint(0,len(liste_verbes))-1]
+    sujet2 = liste_sujets[random.randint(0,len(liste_sujets))-1]
+    adjectif = liste_adjectifs[random.randint(0,len(liste_adjectifs))-1]
+    content = (sujet + " " + verbe + " " + sujet2 + " " + adjectif + ".").capitalize()
+    media = ""
+
+    return content, media
+     
 # Debug log
 if DEBUG is True:
 	log_file = open(DEBUG_FILE, 'ab+')
@@ -280,11 +323,12 @@ options = [
     "cpu_load",
     "cpu_temp",
     "mem_load",
+    "kernel",
     "gif",
     "digital",
     "kaamelott",
     "fakeYourTwitterName",
-    "kernel"
+    "bullshit"
 ]
 
 # Si argument passé
