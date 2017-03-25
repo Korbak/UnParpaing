@@ -28,5 +28,8 @@ Le bot lance une citation de Kaamelott au hasard parmis + de 500.
 # FakeYourTwitterName()
 Le bot prend deux tweets d'un compte Twitter pré-sélectionné, et les mélange entre eux en ajoutant un # associé.
 
+# Bullshit()
+Le bot génère aléatoirement une phrase de bullshit-language au sujet des nouvelles technologies, sauce webmarketing.
+
 # Pour croner la bête
 Personnellement, j'ai simplement créé un script bash exécutant la commande python unparpaing.py dans /etc/cron.hourly. Si vous voulez vous amuser un peu plus, Shevabam (lien git en haut du fichier README.md) avait prévu un fonctionnement aléatoire entre 1h30 et 11h30.
