@@ -15,6 +15,7 @@ Les fonctions suivantes ont été ajoutées au projet de base :
 - digital()
 - kaamelott()
 - fakeYourTwitterName()
+- bullshit()
 
 # Twitter()
 La fonction twitter() permet de générer un objet Twitter afin d'exécuter les commandes spécifiques à Twython et l'API Twitter. Cela permet de faire des recherches, récupérer des tweets, etc. Cette fonctionnalité n'était pas utilisée dans les versions précédentes du projet. En effet, aucune de celles-ci ne jouaient avec la twittosphère. Le bot parlait dans son coin.
