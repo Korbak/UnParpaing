@@ -40,7 +40,7 @@ def sizeToHuman(num, suffix='B'):
 def twitter():
     twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-    return twitter;
+    return twitter
 
 # Uptime
 def uptime():
@@ -232,7 +232,7 @@ def fakeYourTwitterName():
     
     for i in range(0, 16):
         j = len(liste_tweets)
-        user_timeline = tw.get_user_timeline(screen_name="Your_Twitter_Name,count=200,include_retweets=False)
+        user_timeline = tw.get_user_timeline(screen_name="Your_Twitter_Name",count=200,include_retweets=False)
         for tweet in user_timeline:
             liste_tweets.insert(j, tweet['text'])
             j += 1
